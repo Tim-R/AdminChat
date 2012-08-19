@@ -1,0 +1,50 @@
+name: AdminChat
+version: 1.0
+description: Create a private chat channel for server administrators
+author: Timroden
+website: http://dev.bukkit.org/
+main: net.timroden.adminchat.AdminChat
+
+commands:
+    ad:
+        description: Allows you to send messages in Admin Chat
+    all:
+        description: Allows you to send messages in All Chat
+        
+
+permissions:
+    adminchat.*:
+        description: Full control over AdminChat
+        default: op
+        children:
+            adminchat.admin: true
+            adminchat.view.*: true
+            adminchat.send.*: true   
+    adminchat.view.*:
+        description: Allows you to view all messages sent within Admin/All chat
+        default: false
+        children: 
+            adminchat.view.admin: true
+            adminchat.view.all: true
+    adminchat.send.*:
+        description: Allows you to send messages in both Admin and All chat
+        default: false
+        children:
+            adminchat.send.admin: true
+            adminchat.send.all: true
+    adminchat.admin: 
+        description: Allows you to reload AdminChat's config
+        default: false
+    adminchat.view.admin:
+        description: Allows you to view admin chat
+        default: false
+    adminchat.view.all: 
+        description: Allows you to view all chat
+        default: false
+    adminchat.send.admin: 
+        description: Allows you to send to admin chat
+        default: false
+    adminchat.send.all: 
+        description: Allows you to send to all chat
+        default: false
+        
