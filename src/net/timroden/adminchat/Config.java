@@ -7,8 +7,9 @@ public class Config {
 	private AdminChat plugin;
 	private static Configuration config;
 
-	public Boolean useCustomConsoleName;
-	public String consoleSenderName, allPrefix, adminPrefix, allMasked, toAdminPrefix, rawChatPrefix;
+	public Boolean useCustomConsoleName, notifyVersion, chatListen;
+	public String consoleSenderName, allPrefix, adminPrefix, allMasked, toAdminPrefix, rawPrefixAdmin, rawPrefixAll;
+	public char colorPrefix;
 
 	public Config(AdminChat plugin) {
 		this.plugin = plugin;
@@ -16,12 +17,7 @@ public class Config {
 		config.options().copyDefaults(true);
 		plugin.saveConfig();
 
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			@Override
-			public void run() {
-				getOpts();
-			}			
-		}, 1L);
+		getOpts();
 	}
 
 	public void reload() {
@@ -31,17 +27,23 @@ public class Config {
 		getOpts();
 	}
 
-	public void getOpts() {
+	public void getOpts() {		
 		useCustomConsoleName = config.getBoolean("adminchat.usecustomconsolename");
+		notifyVersion = config.getBoolean("adminchat.notifyonversion");
+		chatListen = config.getBoolean("adminchat.listeninchat");
 
-		allPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allprefix").replace("\"", "")) + ChatColor.RESET;
-		allMasked = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allmasked").replace("\"", "")) + ChatColor.RESET;
+		allPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allprefix")) + ChatColor.RESET;
+		allMasked = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allmasked")) + ChatColor.RESET;
 
-		adminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminprefix").replace("\"", "")) + ChatColor.RESET;
-		toAdminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.toadminprefix").replace("\"", "")) + ChatColor.RESET;
+		adminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminprefix")) + ChatColor.RESET;
+		toAdminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.toadminprefix")) + ChatColor.RESET;
 
-		rawChatPrefix = config.getString("adminchat.rawprefix");
 
-		consoleSenderName = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.customconsolename").replace("\"", "")) + ChatColor.RESET;
+		colorPrefix = config.getString("adminchat.colorprefix").charAt(0);
+		
+		rawPrefixAdmin = config.getString("adminchat.rawprefixadmin");
+		rawPrefixAll = config.getString("adminchat.rawprefixall");
+
+		consoleSenderName = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.customconsolename")) + ChatColor.RESET;
 	}
 }

@@ -8,4 +8,9 @@ adminchat:
     usecustomconsolename: true
     customconsolename: "&7[&6CONSOLE&7]"
     
-    rawprefix: "@"
+    listeninchat: true
+    
+    rawprefixadmin: "@"
+    rawprefixall: "@@"
+    
+    notifyonversion: true

@@ -47,4 +47,7 @@ permissions:
     adminchat.send.all: 
         description: Allows you to send to all chat
         default: false
+    adminchat.notify: 
+        description: Notify you when AdminChat is out of date
+        default: false
         

@@ -36,7 +36,7 @@ public class AdminChat extends JavaPlugin {
 
 		pm = getServer().getPluginManager();
 
-		//vc.versionCheck();
+		vc.versionCheck();
 
 		try {
 			metrics = new Metrics(this);
@@ -68,8 +68,7 @@ public class AdminChat extends JavaPlugin {
 		}
 		if(cmd.getName().equalsIgnoreCase("ad")) {
 			if(args.length < 1) {
-				sender.sendMessage(chatPrefix + "Syntax error.");
-				displayHelpDialogue(sender, "ad");
+				displayHelpDialogue(sender, CommandType.AD);
 				return true;
 			}
 			if(args.length == 1 && args[0].equalsIgnoreCase("reload")) {
@@ -82,28 +81,39 @@ public class AdminChat extends JavaPlugin {
 				sender.sendMessage(chatPrefix + ChatColor.GRAY + "Config reloaded.");
 				return true;
 			}
+			
+			if(args.length == 1 && args[0].equalsIgnoreCase("help")) {
+				displayHelpDialogue(sender, CommandType.AD);
+				return true;
+			}
+			
 			if(!sender.hasPermission("adminchat.send.admin")) {
 				sender.sendMessage(chatPrefix + ChatColor.RED + "You don't have permission to send admin chat messages." + ChatColor.GRAY + " (adminchat.send.admin)");
 				return true;
 			}
-			displayMessage(sender, utils.implode(" ", args), name, "ad");
+			displayMessage(sender, utils.implode(" ", args), name, CommandType.AD);
 		} 
 		if(cmd.getName().equalsIgnoreCase("all")) {
 			if(args.length < 1) {
-				sender.sendMessage(chatPrefix + "Syntax error.");
-				displayHelpDialogue(sender, "all");
+				displayHelpDialogue(sender, CommandType.ALL);
 				return true;
 			}
+			
+			if(args.length == 1 && args[0].equalsIgnoreCase("help")) {
+				displayHelpDialogue(sender, CommandType.ALL);
+				return true;
+			}
+			
 			if(!sender.hasPermission("adminchat.send.all")) {
 				sender.sendMessage(chatPrefix + ChatColor.RED + "You don't have permission to send all chat messages." + ChatColor.GRAY + " (adminchat.send.all)");
 				return true;
 			}
-			displayMessage(sender, utils.implode(" ", args), name, "all");
+			displayMessage(sender, utils.implode(" ", args), name, CommandType.ALL);
 		}
 		return false;		
 	}
 
-	public void displayHelpDialogue(CommandSender sender, String cmdHelp) {
+	public void displayHelpDialogue(CommandSender sender, CommandType type) {
 		sender.sendMessage(chatPrefix + ChatColor.GREEN + "Available commands:");		
 		if(sender.hasPermission("adminchat.send.admin")) {
 			sender.sendMessage(chatPrefix + ChatColor.GRAY + "/ad <message> - Send a message to AdminChat");
@@ -114,41 +124,51 @@ public class AdminChat extends JavaPlugin {
 		if(sender.hasPermission("adminchat.admin")) {
 			sender.sendMessage(chatPrefix + ChatColor.GRAY + "/ad reload - Reload AdminChat config");
 		}
-		sender.sendMessage(chatPrefix + ChatColor.GRAY + "/" + cmdHelp + " help - Display this help dialogue");
+		sender.sendMessage(chatPrefix + ChatColor.GRAY + "/" + type.getValue() + " help - Display this help dialogue");
 	}
 
-	public void displayMessage(CommandSender sender, String message, String name, String cmd) {
+	public void displayMessage(CommandSender sender, String message, String name, CommandType type) {
 		Player p = null;
+		boolean putToConsole = true;
+		ConsoleCommandSender ccs = Bukkit.getConsoleSender();
 		String resetName = name + ChatColor.RESET;
 		String msg = ChatColor.translateAlternateColorCodes('&', message);
 
 		if(sender instanceof Player) {
 			p = (Player) sender;
+		} else if(sender instanceof ConsoleCommandSender) {
+			putToConsole = false;
 		}
 
-		if(cmd.equalsIgnoreCase("ad")) {
+		if(type.equals(CommandType.AD)) {
 			if(sender.hasPermission("adminchat.view.admin")) {
 				sender.sendMessage(config.adminPrefix + " " + resetName + ": " + msg);
 			} else {
 				sender.sendMessage(config.toAdminPrefix + " " + resetName + ": " + msg);
 			}
+			if(putToConsole) {
+				ccs.sendMessage(config.adminPrefix + " " + resetName + ": " + msg);
+			}
 		}		
 
-		if(cmd.equalsIgnoreCase("all")) {
+		if(type.equals(CommandType.ALL)) {
 			sender.sendMessage(config.allPrefix + " " + resetName + ": " + msg);
+			if(putToConsole) {
+				ccs.sendMessage(config.allPrefix + " " + resetName + ": " + msg);
+			}
 		}
-
+		
 		for(Player pl : Bukkit.getServer().getOnlinePlayers()) {
 			if(p == pl) 
 				continue;
 
-			if(cmd.equalsIgnoreCase("ad")) {
+			if(type.equals(CommandType.AD)) {
 				if(pl.hasPermission("adminchat.view.admin")) {
 					pl.sendMessage(config.adminPrefix + " " + resetName + ": " + msg);
 				}
 			}
 
-			if(cmd.equalsIgnoreCase("all")) {
+			if(type.equals(CommandType.ALL)) {
 				if(pl.hasPermission("adminchat.send.all")) {
 					pl.sendMessage(config.allPrefix + " " + resetName + ": " + msg);
 				} else {

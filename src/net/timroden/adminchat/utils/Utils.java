@@ -1,6 +1,7 @@
 package net.timroden.adminchat.utils;
 
 import net.timroden.adminchat.AdminChat;
+import net.timroden.adminchat.CommandType;
 
 public class Utils {
 	public AdminChat plugin;
@@ -18,7 +19,14 @@ public class Utils {
 		return sb.toString();
 	}
 
-	public String fix(String message) {
-		return message.replace(plugin.config.rawChatPrefix, "");
+	public String fix(String message, CommandType type) {
+		if(type.equals(CommandType.AD)) {
+			return message.substring(plugin.config.rawPrefixAdmin.length());
+		}
+		
+		if(type.equals(CommandType.ALL)) {
+			return message.substring(plugin.config.rawPrefixAll.length());
+		}
+		return message;
 	}
 }

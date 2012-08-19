@@ -24,7 +24,7 @@ public class VersionChecker {
 	public String getLatestVersion() {		
 		String latestVersion = null;
 		String uA = plugin.getDescription().getName() + " " + plugin.getDescription().getVersion();
-		final String address = "http://dev.bukkit.org/server-mods/adminchat/files/";
+		final String address = "http://dev.bukkit.org/server-mods/adminchat-timr/files/";
 		final URL url;
 		URLConnection connection = null;
 		BufferedReader bufferedReader = null;
@@ -64,7 +64,7 @@ public class VersionChecker {
 			if (compare < 0) {
 				msg = "The version of " + pName + " this server is running is out of date. Latest version: " + latestVersion;
 				isLatestVersion = false;
-				versionMessage = msg + " You can download the latest version at http://dev.bukkit.org/server-mods/adminchat/files/";
+				versionMessage = msg + " You can download the latest version at http://dev.bukkit.org/server-mods/adminchat-timr/files/";
 				plugin.log.warning("[" + pName + "] " + msg);
 			} else if (compare == 0) { 
 				msg = plugin.getDescription().getName() + " is up to date!";
