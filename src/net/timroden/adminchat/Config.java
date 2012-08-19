@@ -9,13 +9,13 @@ public class Config {
 
 	public Boolean useCustomConsoleName;
 	public String consoleSenderName, allPrefix, adminPrefix, allMasked, toAdminPrefix, rawChatPrefix;
-	
+
 	public Config(AdminChat plugin) {
 		this.plugin = plugin;
 		config = plugin.getConfig().getRoot();
 		config.options().copyDefaults(true);
 		plugin.saveConfig();
-		
+
 		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			@Override
 			public void run() {
@@ -33,15 +33,15 @@ public class Config {
 
 	public void getOpts() {
 		useCustomConsoleName = config.getBoolean("adminchat.usecustomconsolename");
-		
+
 		allPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allprefix").replace("\"", "")) + ChatColor.RESET;
 		allMasked = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allmasked").replace("\"", "")) + ChatColor.RESET;
-		
+
 		adminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminprefix").replace("\"", "")) + ChatColor.RESET;
 		toAdminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.toadminprefix").replace("\"", "")) + ChatColor.RESET;
-		
+
 		rawChatPrefix = config.getString("adminchat.rawprefix");
-		
+
 		consoleSenderName = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.customconsolename").replace("\"", "")) + ChatColor.RESET;
 	}
 }

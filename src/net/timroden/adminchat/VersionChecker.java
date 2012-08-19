@@ -17,7 +17,7 @@ public class VersionChecker {
 
 	public VersionChecker(AdminChat plugin) {
 		this.plugin = plugin;
-		
+
 		pName = plugin.getDescription().getName();		
 	}	
 

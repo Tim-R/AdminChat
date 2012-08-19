@@ -1,6 +1,6 @@
 adminchat:
     allprefix: "&a(&7ALL&a)"
-    allmasked: "&7ADMIN"
+    allmasked: "&3ADMIN"
     
     adminprefix: "&a(&7ADMINS&a)"
     toadminprefix: "&a(&7TO ADMINS&a)"
