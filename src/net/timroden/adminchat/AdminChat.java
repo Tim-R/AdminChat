@@ -30,13 +30,14 @@ public class AdminChat extends JavaPlugin {
 		Long st = System.currentTimeMillis();
 
 		vc = new VersionChecker(this);		
+		
+		vc.start();
+		
 		pl = new PlayerListener(this);
 		utils = new Utils(this);
 		config = new Config(this);
 
 		pm = getServer().getPluginManager();
-
-		vc.versionCheck();
 
 		try {
 			metrics = new Metrics(this);
