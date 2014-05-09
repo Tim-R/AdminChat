@@ -1,16 +1,18 @@
 adminchat:
-    allprefix: "&a(&7ALL&a)"
-    allmasked: "&3ADMIN"
-    
-    adminprefix: "&a(&7ADMINS&a)"
-    toadminprefix: "&a(&7TO ADMINS&a)"
-    
+    allprefix: "&a(&7ALL&a)&f"
+    allmasked: "&3ADMIN&f"
+    allsuffix: "&f: "
+
+    adminprefix: "&a(&7ADMINS&a)&f"
+    toadminprefix: "&a(&7TO ADMINS&a)&f"
+    adminsuffix: "&f: "
+
     usecustomconsolename: true
     customconsolename: "&7[&6CONSOLE&7]"
-    
+
     listeninchat: true
-    
+
     rawprefixadmin: "@"
     rawprefixall: "@@"
-    
+
     notifyonversion: true
