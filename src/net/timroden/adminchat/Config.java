@@ -32,12 +32,12 @@ public class Config {
 		notifyVersion = config.getBoolean("adminchat.notifyonversion");
 		chatListen = config.getBoolean("adminchat.listeninchat");
 
-		allPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allprefix")) + ChatColor.RESET;
-		allMasked = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allmasked")) + ChatColor.RESET;
+		allPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allprefix"));
+		allMasked = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allmasked"));
 		allSuffix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allsuffix"));
 
-		adminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminprefix")) + ChatColor.RESET;
-		toAdminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.toadminprefix")) + ChatColor.RESET;
+		adminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminprefix"));
+		toAdminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.toadminprefix"));
 		adminSuffix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminsuffix"));
 
 
