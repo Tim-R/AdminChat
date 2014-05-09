@@ -143,19 +143,19 @@ public class AdminChat extends JavaPlugin {
 
 		if(type.equals(CommandType.AD)) {
 			if(sender.hasPermission("adminchat.view.admin")) {
-				sender.sendMessage(config.adminPrefix + " " + resetName + ": " + msg);
+				sender.sendMessage(config.adminPrefix + " " + resetName + config.adminSuffix + msg);
 			} else {
-				sender.sendMessage(config.toAdminPrefix + " " + resetName + ": " + msg);
+				sender.sendMessage(config.toAdminPrefix + " " + resetName + config.adminSuffix + msg);
 			}
 			if(putToConsole) {
-				ccs.sendMessage(config.adminPrefix + " " + resetName + ": " + msg);
+				ccs.sendMessage(config.adminPrefix + " " + resetName + config.adminSuffix + msg);
 			}
 		}		
 
 		if(type.equals(CommandType.ALL)) {
-			sender.sendMessage(config.allPrefix + " " + resetName + ": " + msg);
+			sender.sendMessage(config.allPrefix + " " + resetName + config.allSuffix + msg);
 			if(putToConsole) {
-				ccs.sendMessage(config.allPrefix + " " + resetName + ": " + msg);
+				ccs.sendMessage(config.allPrefix + " " + resetName + config.allSuffix + msg);
 			}
 		}
 		
@@ -165,15 +165,15 @@ public class AdminChat extends JavaPlugin {
 
 			if(type.equals(CommandType.AD)) {
 				if(pl.hasPermission("adminchat.view.admin")) {
-					pl.sendMessage(config.adminPrefix + " " + resetName + ": " + msg);
+					pl.sendMessage(config.adminPrefix + " " + resetName + config.adminSuffix + msg);
 				}
 			}
 
 			if(type.equals(CommandType.ALL)) {
 				if(pl.hasPermission("adminchat.send.all")) {
-					pl.sendMessage(config.allPrefix + " " + resetName + ": " + msg);
+					pl.sendMessage(config.allPrefix + " " + resetName + config.allSuffix + msg);
 				} else {
-					pl.sendMessage(config.allPrefix + " " + config.allMasked + ": " + msg);
+					pl.sendMessage(config.allPrefix + " " + config.allMasked + config.allSuffix + msg);
 				}
 			}
 		}

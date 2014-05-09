@@ -8,7 +8,7 @@ public class Config {
 	private static Configuration config;
 
 	public Boolean useCustomConsoleName, notifyVersion, chatListen;
-	public String consoleSenderName, allPrefix, adminPrefix, allMasked, toAdminPrefix, rawPrefixAdmin, rawPrefixAll;
+	public String consoleSenderName, allPrefix, adminPrefix, allMasked, toAdminPrefix, rawPrefixAdmin, rawPrefixAll, allSuffix, adminSuffix;
 	public char colorPrefix;
 
 	public Config(AdminChat plugin) {
@@ -34,9 +34,11 @@ public class Config {
 
 		allPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allprefix")) + ChatColor.RESET;
 		allMasked = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allmasked")) + ChatColor.RESET;
+		allSuffix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.allsuffix"));
 
 		adminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminprefix")) + ChatColor.RESET;
 		toAdminPrefix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.toadminprefix")) + ChatColor.RESET;
+		adminSuffix = ChatColor.translateAlternateColorCodes('&', config.getString("adminchat.adminsuffix"));
 
 
 		colorPrefix = config.getString("adminchat.colorprefix").charAt(0);
